@@ -1,0 +1,14 @@
+{
+  "name": "InfoVE",
+  "description": "Proveedor centralizado de información sobre varios servicios en Venezuela",
+  "launch_path": "/main.php",
+  "developer": {
+    "name": "William Cabrera",
+    "url": "http://willicab.com.ve"
+  },
+  "default_locale": "es",
+  "icons": {
+    "128": "/img/icon-128.png",
+    "60": "/img/icon-60.png"
+  }
+}
