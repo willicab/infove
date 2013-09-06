@@ -273,7 +273,7 @@
                         DigiVal = 11 - Residuo;
                         if (DigiVal > 9) DigiVal = 0;
                         //if (DigiVal == cadena[9]) return true;
-                        else return RIF + DigiVal;
+                        return RIF + DigiVal;
                     }
                     else return false;
                 }
