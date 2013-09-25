@@ -55,6 +55,9 @@
                 $('.goto_seniat').click(function(){
                     mostrar('#inicio_seniat');
                 });
+                $('.goto_corpoelec').click(function(){
+                    mostrar('#inicio_corpoelec');
+                });
                 $('.goto_inicio').click(function(){
                     mostrar('#inicio');
                 });
@@ -207,6 +210,39 @@
                         $('#loading-frame').fadeOut('fast');
                     });
                 });
+                $('#btnBuscarCorpoelec').click(function(){
+                    nic = $('#txtNicCorpoelec').val();
+                    console.log(nic);
+                    $('#loading-frame').fadeIn('fast');
+                    strHTML = '';
+                    var get = $.get(
+                        "get_corpoelec.php", 
+                        {nic: nic},
+                        function(r){
+                            console.log(r);
+                            $('#tituloCorpoelec').text(r['nic']);
+                            if (r['error'] != 0) {
+                                strHTML = '<li style="height:auto;">\n';
+                                strHTML += '<p>Error</p>\n';
+                                strHTML += '<p style="white-space:normal !important; color: #844">' + r['error'] + '</p>\n';
+                                strHTML += '</li>\n';
+                            } else {
+                                strHTML = '<li style="height:auto;">\n<p>Usuario</p>\n<p style="white-space:normal !important;">' + r['usuario'] + '</p>\n</li>\n'; // 
+                                strHTML += '<li>\n<p>Deuda Pendiente</p>\n<p>' + r['pendiente'] + '</p>\n</li>\n'; // 
+                                strHTML += '<li>\n<p>Deuda Vencida</p>\n<p>' + r['vencido'] + '</p>\n</li>\n'; // 
+                            }
+                            $('#lstResultSENIAT').html(strHTML);
+                            mostrar('#resultado_seniat');
+                        }, 
+                        'json'
+                    );
+                    get.fail(function(){
+                        console.log("error");
+                    });
+                    get.always(function(){
+                        $('#loading-frame').fadeOut('fast');
+                    });
+                });
                 function VerifRIF(RIF) {
                     var SumRIF;
                     var NumRif;
@@ -300,6 +336,11 @@
                 background-position: center bottom, left top !important;
                 background-repeat: no-repeat, repeat !important;
             }
+            .corpoelec {
+                background-image: url(img/corpoelec_mark.png), url(img/corpoelec_min.png) !important;
+                background-position: center bottom, left top !important;
+                background-repeat: no-repeat, repeat !important;
+            }
             #loading-frame {
                 position: absolute;
                 top: 0;
@@ -367,6 +408,12 @@
                             <a class="goto_seniat" href="#">
                                 <aside class="pack-end"><img alt="photo" src="img/seniat.png"></aside>
                                 <p>SENIAT</p><p>Consulta del RIF</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="goto_corpoelec" href="#">
+                                <aside class="pack-end"><img alt="photo" src="img/corpoelec.png"></aside>
+                                <p>CORPOELEC</p><p>Consulta de deuda</p>
                             </a>
                         </li>
                     </ul>
@@ -476,6 +523,38 @@
             </article>
         </section>
         <!-- Fin Ventana de resultado del SENIAT -->
+        <!-- Ventana CORPOELEC -->
+        <section role="region" class="skin-organic" id="inicio_corpoelec">
+            <header class="fixed">
+                <a class="go_back goto_inicio" href="#"><span class="icon icon-back">back</span></a>
+                <h1>CORPOELEC</h1>
+            </header>
+            <article class="content scrollable header corpoelec">
+                <p>
+                    <label for="txtNicCorpoelec">Ingrese el NIC<sup>*</sup></label>
+                    <input id="txtNicCorpoelec" type="text" name="txtNicCorpoelec" size="10" maxlength="10"  placeholder="Ej: 7654321"/>
+                </p>
+                <button id="btnBuscarCorpoelec">Buscar</button>
+                <p>
+                    <small><sup>*</sup>El NIC corresponde a su número de contrato</small>
+                </p>
+            </article>
+        </section>
+        <!-- Fin Ventana CORPOELEC -->
+        <!-- Ventana de resultado del CORPOELEC -->
+        <section role="region" class="skin-organic" id="resultado_corpoelec">
+            <header class="fixed">
+                <a class="goto_corpoelec" class="go_back" href="#"><span class="icon icon-back">back</span></a>
+                <h1 id="tituloCorpoelec">Corpoelec</h1>
+            </header>
+            <article class="content scrollable header">
+                <div data-type="list">
+                    <ul id="lstResultCorpoelec">
+                    </ul>
+                </div>
+            </article>
+        </section>
+        <!-- Fin Ventana de resultado del CORPOELEC -->
         <!-- Ventana Dialogo Nacionalidad -->
         <section id="mnuNac" data-position="back" class="fullscreen" style="display:none">
             <form role="dialog" data-type="action">
