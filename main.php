@@ -390,7 +390,7 @@
             }
         </style>
     </head>
-    <body>
+    <body style="overflow: hidden !important">
         <!-- Ventana Principal -->
         <section role="region" class="skin-organic" id="inicio">
             <header class="fixed">
