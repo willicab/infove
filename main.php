@@ -42,18 +42,22 @@
         <script>
             $(document).ready(function(){   
                 localStorage['btnMenu'] = '';
+                var strCedula = '';
                 function mostrar(section) {
                     $('section').fadeOut('fast');
                     $(section).fadeIn('fast');
                 }
                 $('.goto_ivss').click(function(){
                     mostrar('#inicio_ivss');
+                    $('#txtCedulaIVSS').val(strCedula);
                 });
                 $('.goto_cne').click(function(){
                     mostrar('#inicio_cne');
+                    $('#txtCedulaCNE').val(strCedula);
                 });
                 $('.goto_seniat').click(function(){
                     mostrar('#inicio_seniat');
+                    $('#txtCedulaSENIAT').val(strCedula);
                 });
                 $('.goto_corpoelec').click(function(){
                     mostrar('#inicio_corpoelec');
@@ -91,6 +95,7 @@
                 });
                 $('#btnBuscarIVSS').click(function(){
                     $('#loading-frame').fadeIn('fast');
+                    strCedula = $('#txtCedulaIVSS').val();
                     var get = $.get(
                         "get_ivss.php", 
                         {nacionalidad: $('#btnNacIVSS').attr('data-opt'), cedula: $('#txtCedulaIVSS').val()},
@@ -129,6 +134,7 @@
                 });
                 $('#btnBuscarCNE').click(function(){
                     $('#loading-frame').fadeIn('fast');
+                    strCedula = $('#txtCedulaCNE').val();
                     strHTML = '';
                     var get = $.get(
                         "get_cne.php", 
@@ -173,6 +179,7 @@
                     });
                 });
                 $('#btnBuscarSENIAT').click(function(){
+                    strCedula = $('#txtCedulaSENIAT').val();
                     rif = (VerifRIF($('#txtCedulaSENIAT').val()) == true) ? $('#txtCedulaSENIAT').val() : genRIF('V' + $('#txtCedulaSENIAT').val());
                     if (rif == false) {
                         alert('El RIF escrito no es válido');
