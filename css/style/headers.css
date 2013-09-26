@@ -181,6 +181,10 @@ section[role="region"] > header:first-child .icon {
   overflow: hidden;
 }
 
+section[role="region"] > header:first-child .icon.icon-about {
+  background-image: url(headers/images/icons/about.png);
+}
+
 section[role="region"] > header:first-child .icon.icon-add {
   background-image: url(headers/images/icons/add.png);
 }

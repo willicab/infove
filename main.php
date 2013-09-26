@@ -65,6 +65,9 @@
                 $('.goto_inicio').click(function(){
                     mostrar('#inicio');
                 });
+                $('.goto_acerca').click(function(){
+                    mostrar('#acerca_de');
+                });
                 $('.btnNac').click(function(){
                     localStorage['btnMenu'] = this.id;
                     if (this.id == "btnNacIVSS") {
@@ -394,6 +397,9 @@
         <!-- Ventana Principal -->
         <section role="region" class="skin-organic" id="inicio">
             <header class="fixed">
+                <menu type="toolbar">
+                    <a class="goto_acerca" href="#"><span class="icon icon-about">about</span></a>
+                </menu>
                 <h1>InfoVE</h1>
             </header>
             <article class="content scrollable header inicio">
@@ -575,6 +581,19 @@
             </form>
         </section>
         <!-- Fin Ventana Dialogo Nacionalidad -->
+        <!-- Ventana Acerca De -->
+        <section role="region" class="skin-organic" id="acerca_de">
+            <header class="fixed">
+                <a class="goto_inicio" class="go_back" href="#"><span class="icon icon-back">back</span></a>
+                <h1 id="tituloCorpoelec">Acerca De...</h1>
+            </header>
+            <article class="content scrollable header">
+                <p>
+                    Proveedor centralizado de información sobre varios servicios en Venezuela.
+                </p>
+            </article>
+        </section>
+        <!-- Fin Ventana Acerca De -->
         <div id="loading-frame"><div id="loading"></div></div>
     </body>
 </html>        
