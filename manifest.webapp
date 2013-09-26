@@ -10,5 +10,6 @@
   "icons": {
     "128": "/img/icon-128.png",
     "60": "/img/icon-60.png"
-  }
+  },
+  "version": "1.1.1"
 }

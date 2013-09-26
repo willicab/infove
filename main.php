@@ -326,6 +326,9 @@
             });
         </script>
         <style>
+            a {
+                text-decoration: none;
+            }
             .inicio {
                 background-image: url(img/infove_mark.png), url(img/infove_min.png) !important;
                 background-position: center bottom, left top !important;
@@ -385,7 +388,7 @@
             footer p{
                 margin: 0;
                 padding: 0;
-                font-size: 10px;
+                font-size: 12px;
                 text-align: center;
             }
             small { 
@@ -587,9 +590,15 @@
                 <a class="goto_inicio" class="go_back" href="#"><span class="icon icon-back">back</span></a>
                 <h1 id="tituloCorpoelec">Acerca De...</h1>
             </header>
-            <article class="content scrollable header">
-                <p>
-                    Proveedor centralizado de información sobre varios servicios en Venezuela.
+            <article class="content scrollable header inicio">
+                <p style="text-align: center">
+                    Proveedor centralizado de información sobre varios servicios en Venezuela.<br />
+                    <br />
+                    &copy; Copyleft 2013<br />
+                    <br />
+                    William Cabrera <a target="_blank" href="http://twitter.com/willicab">@willicab</a><br />
+                    <br />
+                    <a target="_blank" href="http://infove.willicab.com.ve">http://infove.willicab.com.ve</a>
                 </p>
             </article>
         </section>
