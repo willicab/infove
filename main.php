@@ -241,8 +241,8 @@
                                 strHTML += '<li>\n<p>Deuda Pendiente</p>\n<p>' + r['pendiente'] + '</p>\n</li>\n'; // 
                                 strHTML += '<li>\n<p>Deuda Vencida</p>\n<p>' + r['vencido'] + '</p>\n</li>\n'; // 
                             }
-                            $('#lstResultSENIAT').html(strHTML);
-                            mostrar('#resultado_seniat');
+                            $('#lstResultCorpoelec').html(strHTML);
+                            mostrar('#resultado_corpoelec');
                         }, 
                         'json'
                     );
