@@ -13,7 +13,8 @@
         curl_setopt($ch,CURLOPT_FRESH_CONNECT,TRUE);
         curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,5);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,TRUE);
-        curl_setopt($ch,CURLOPT_REFERER,'http://www.google.ch/');
+        curl_setopt($ch, CURLOPT_REFERER,'http://www.cne.gob.ve/');
+        curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (X11; Linux i686; rv:32.0) Gecko/20100101 Firefox/32.0');
         curl_setopt($ch,CURLOPT_TIMEOUT,10);
         //curl_setopt ($ch, CURLOPT_POSTFIELDS, $str);
         $html=curl_exec($ch);

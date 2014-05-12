@@ -62,6 +62,9 @@
                 $('.goto_corpoelec').click(function(){
                     mostrar('#inicio_corpoelec');
                 });
+                $('.goto_cantv').click(function(){
+                    mostrar('#inicio_cantv');
+                });
                 $('.goto_inicio').click(function(){
                     mostrar('#inicio');
                 });
@@ -253,6 +256,42 @@
                         $('#loading-frame').fadeOut('fast');
                     });
                 });
+                $('#btnBuscarCantv').click(function(){
+                    sarea = $('#txtCodigoCantv').val();
+                    stelefono = $('#txtTelefonoCantv').val();
+                    $('#loading-frame').fadeIn('fast');
+                    strHTML = '';
+                    var post = $.post(
+                        "get_cantv.php", 
+                        {sarea: sarea, stelefono: stelefono},
+                        function(r){
+                            console.log(r);
+                            $('#tituloCantv').text(r['telefono']);
+                            if (r['error'] != '') {
+                                strHTML = '<li style="height:auto;">\n';
+                                strHTML += '<p>Error</p>\n';
+                                strHTML += '<p style="white-space:normal !important; color: #844">' + r['error'] + '</p>\n';
+                                strHTML += '</li>\n';
+                            } else {
+                                strHTML = '<li style="height:auto;">\n<p>Saldo actual Bs.</p>\n<p style="white-space:normal !important;">' + r['saldo'] + '</p>\n</li>\n';
+                                strHTML += '<li style="height:auto;">\n<p>Fecha de última facturación</p>\n<p style="white-space:normal !important;">' + r['facturacion'] + '</p>\n</li>\n';
+                                strHTML += '<li style="height:auto;">\n<p>Fecha de corte</p>\n<p style="white-space:normal !important;">' + r['corte'] + '</p>\n</li>\n';
+                                strHTML += '<li style="height:auto;">\n<p>Fecha de vencimiento</p>\n<p style="white-space:normal !important;">' + r['vencimiento'] + '</p>\n</li>\n';
+                                strHTML += '<li style="height:auto;">\n<p>Saldo vencido</p>\n<p style="white-space:normal !important;">' + r['vencido'] + '</p>\n</li>\n';
+                                strHTML += '<li style="height:auto;">\n<p style="white-space:normal !important;">Monto del último pago realizado</p>\n<p style="white-space:normal !important;">' + r['monto'] + '</p>\n</li>\n';
+                            }
+                            $('#lstResultCantv').html(strHTML);
+                            mostrar('#resultado_cantv');
+                        }, 
+                        'json'
+                    );
+                    post.fail(function(){
+                        console.log("error");
+                    });
+                    post.always(function(){
+                        $('#loading-frame').fadeOut('fast');
+                    });
+                });
                 function VerifRIF(RIF) {
                     var SumRIF;
                     var NumRif;
@@ -354,6 +393,11 @@
                 background-position: center bottom, left top !important;
                 background-repeat: no-repeat, repeat !important;
             }
+            .cantv {
+                background-image: url(img/cantv_mark.png), url(img/cantv_min.png) !important;
+                background-position: center bottom, left top !important;
+                background-repeat: no-repeat, repeat !important;
+            }
             #loading-frame {
                 position: absolute;
                 top: 0;
@@ -408,12 +452,12 @@
             <article class="content scrollable header inicio">
                 <div data-type="list">
                     <ul id="lstMenu">
-                        <li>
+                        <!--li>
                             <a class="goto_ivss" href="#">
                                 <aside class="pack-end"><img alt="photo" src="img/ivss.png"></aside>
                                 <p>IVSS</p><p>Consulta del Seguro Social</p>
                             </a>
-                        </li>
+                        </li-->
                         <li>
                             <a class="goto_cne" href="#">
                                 <aside class="pack-end"><img alt="photo" src="img/cne.png"></aside>
@@ -432,6 +476,12 @@
                                 <p>CORPOELEC</p><p>Consulta de deuda</p>
                             </a>
                         </li>
+                        <!--li>
+                            <a class="goto_cantv" href="#">
+                                <aside class="pack-end"><img alt="photo" src="img/cantv.png"></aside>
+                                <p>CANTV</p><p>Consulta de deuda</p>
+                            </a>
+                        </li-->
                     </ul>
                 </div>
             </article>
@@ -571,6 +621,39 @@
             </article>
         </section>
         <!-- Fin Ventana de resultado del CORPOELEC -->
+        <!-- Ventana CANTV -->
+        <section role="region" class="skin-organic" id="inicio_cantv">
+            <header class="fixed">
+                <a class="go_back goto_inicio" href="#"><span class="icon icon-back">back</span></a>
+                <h1>CANTV</h1>
+            </header>
+            <article class="content scrollable header cantv">
+                <p>
+                    <label for="txtCodigoCantv">Ingrese el Código de Area</label>
+                    <input id="txtCodigoCantv" type="text" name="txtNicCorpoelec" size="10" maxlength="10"  placeholder="Ej: 212"/>
+                </p>
+                <p>
+                    <label for="txtTelefonoCantv">Ingrese el Número de Teléfono</label>
+                    <input id="txtTelefonoCantv" type="text" name="txtNicCorpoelec" size="10" maxlength="10"  placeholder="Ej: 5555555"/>
+                </p>
+                <button id="btnBuscarCantv">Buscar</button>
+            </article>
+        </section>
+        <!-- Fin Ventana CANTV -->
+        <!-- Ventana de resultado del CANTV -->
+        <section role="region" class="skin-organic" id="resultado_cantv">
+            <header class="fixed">
+                <a class="goto_cantv" class="go_back" href="#"><span class="icon icon-back">back</span></a>
+                <h1 id="tituloCantv">CANTV</h1>
+            </header>
+            <article class="content scrollable header cantv">
+                <div data-type="list">
+                    <ul id="lstResultCantv">
+                    </ul>
+                </div>
+            </article>
+        </section>
+        <!-- Fin Ventana de resultado del CANTV -->
         <!-- Ventana Dialogo Nacionalidad -->
         <section id="mnuNac" data-position="back" class="fullscreen" style="display:none">
             <form role="dialog" data-type="action">
@@ -597,8 +680,10 @@
                     &copy; Copyleft 2013<br />
                     <br />
                     William Cabrera <a target="_blank" href="http://twitter.com/willicab">@willicab</a><br />
+                    <a target="_blank" href="http://infove.willicab.com.ve">http://infove.willicab.com.ve</a><br />
                     <br />
-                    <a target="_blank" href="http://infove.willicab.com.ve">http://infove.willicab.com.ve</a>
+                    Soporte a CANTV realizado por Yury Jajitzky <a target="_blank" href="http://twitter.com/yuryja">@yuryja</a><br />
+                    <a target="_blank" href="labitacoradelruso.blogspot.com">labitacoradelruso.blogspot.com</a><br />
                 </p>
             </article>
         </section>
